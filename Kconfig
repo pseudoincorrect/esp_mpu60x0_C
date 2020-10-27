@@ -1,0 +1,88 @@
+menu "MPU 60x0 driver"
+
+################################################################################
+# Options defined in this menu
+#
+# CONFIG_MPU_CHIP_MODEL
+# CONFIG_MPU_6000
+# CONFIG_MPU_6050
+# CONFIG_MPU_I2C
+# CONFIG_MPU_SPI
+# CONFIG_MPU_LOG_LEVEL
+
+################################################################################
+# Chip model selection
+choice MPU_CHIP_MODEL
+    prompt "MPU chip model"
+    default MPU_6050
+    help
+        Select MPU chip model which will be used with MPU library.
+
+config MPU_6000
+    bool "MPU_6000"
+config MPU_6050
+    bool "MPU_6050"
+
+endchoice
+
+################################################################################
+# Communication protocol selection
+choice MPU_COMM_PROTOCOL
+    prompt "MPU communication protocol I2C/SPI"
+    default I2C
+    help
+        Select the MPU communication protocol: I2C or SPI
+    
+config MPU_I2C
+    bool "MPU_I2C"
+
+config MPU_SPI
+    bool "MPU_SPI"
+    depends on MPU_6000
+
+endchoice
+
+
+################################################################################
+# Log output level
+
+choice MPU_LOG_LEVEL
+    prompt "Choose a Log level"
+    default MPU_LOG_LVL_WARNING
+
+config MPU_LOG_LVL_NONE
+    bool "None"
+config MPU_LOG_LVL_ERROR
+    bool "Error"
+config MPU_LOG_LVL_WARNING
+    bool "Warning"
+config MPU_LOG_LVL_INFO
+    bool "Info"
+config MPU_LOG_LVL_DEBUG
+    bool "Debug"
+
+    
+# config MPU_LOG_LVL_NONE
+#     bool "0"
+# config MPU_LOG_LVL_ERROR
+#     bool "1"
+# config MPU_LOG_LVL_WARNING
+#     bool "2"
+# config MPU_LOG_LVL_INFO
+#     bool "3"
+# config MPU_LOG_LVL_DEBUG
+#     bool "4"
+
+endchoice
+
+config MPU_LOG_LEVEL
+    int
+    # MPU_LOG_LVL_DEBUG as default
+    default 0 if MPU_LOG_LVL_NONE
+    default 1 if MPU_LOG_LVL_ERROR
+    default 2 if MPU_LOG_LVL_WARNING
+    default 3 if MPU_LOG_LVL_INFO
+    default 4 if MPU_LOG_LVL_DEBUG
+
+################################################################################
+endmenu
