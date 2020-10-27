@@ -1,3 +1,15 @@
+// =========================================================================
+// This library is placed under the MIT License
+//
+// C port
+// Copyright 2020 Maxime Clement
+//
+// Original Author esp32-MPU-driver C++ libraries
+// Copyright 2017-2018 Natanael Josue Rabello
+//
+// For the license information refer to LICENSE file in root directory
+// =========================================================================
+
 #ifndef __mpu60x0_registers_h__
 #define __mpu60x0_registers_h__
 
@@ -296,6 +308,6 @@ const uint8_t MPU_MOTCTRL_FF_COUNT_LENGTH       = (2);
 const uint8_t MPU_MOTCTRL_MOT_COUNT_BIT         = (1);  // [1:0]
 const uint8_t MPU_MOTCTRL_MOT_COUNT_LENGTH      = (2);
 //------------------------------------------------------------------------------
-#endif
+#endif // defined CONFIG_MPU_6050
 
-#endif
+#endif // ifndef __mpu60x0_registers_h__

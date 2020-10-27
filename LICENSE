@@ -1,10 +1,10 @@
 The MIT License (MIT)
 
 (C port)
-Copyright 2020 Maxime Clement. All rights reserved.
+Copyright 2020 Maxime Clement
 
-(Original Author: esp32-MPU-driver and esp-I2Cbus C++ libraries)
-Copyright 2017-2018 Natanael Josue Rabello. All rights reserved.
+(Original Author: esp32-MPU-driver C++ libraries)
+Copyright 2017-2018 Natanael Josue Rabello
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to

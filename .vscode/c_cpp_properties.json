@@ -4,11 +4,11 @@
             "name": "Win32",
             "includePath": [
                 "${workspaceFolder}/**",
-                "C:\\Users\\maxim\\Programming\\SDKs\\Espressif\\terminal\\esp-idf\\components"
+                "C:/Users/maxim/Programming/SDKs/Espressif/terminal/esp-idf/components/**"
             ],
             "browse": {
                 "path": [
-                    "C:\\Users\\maxim\\Programming\\SDKs\\Espressif\\terminal\\esp-idf\\components"
+                    "C:/Users/maxim/Programming/SDKs/Espressif/terminal/esp-idf/components/**"
                 ]
             },
             "defines": [
@@ -18,7 +18,7 @@
                 "CONFIG_MPU_I2C",
                 "CONFIG_MPU_6050"
             ],
-            "compilerPath": "C:\\ProgramNoSpace\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\gcc.exe",
+            "compilerPath": "C:/ProgramNoSpace/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/gcc.exe",
             "cStandard": "gnu17",
             "cppStandard": "gnu++14",
             "intelliSenseMode": "gcc-x64"

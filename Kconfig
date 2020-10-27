@@ -48,7 +48,7 @@ endchoice
 
 choice MPU_LOG_LEVEL
     prompt "Choose a Log level"
-    default MPU_LOG_LVL_WARNING
+    default MPU_LOG_LVL_DEBUG
 
 config MPU_LOG_LVL_NONE
     bool "None"
@@ -61,23 +61,10 @@ config MPU_LOG_LVL_INFO
 config MPU_LOG_LVL_DEBUG
     bool "Debug"
 
-    
-# config MPU_LOG_LVL_NONE
-#     bool "0"
-# config MPU_LOG_LVL_ERROR
-#     bool "1"
-# config MPU_LOG_LVL_WARNING
-#     bool "2"
-# config MPU_LOG_LVL_INFO
-#     bool "3"
-# config MPU_LOG_LVL_DEBUG
-#     bool "4"
-
 endchoice
 
 config MPU_LOG_LEVEL
     int
-    # MPU_LOG_LVL_DEBUG as default
     default 0 if MPU_LOG_LVL_NONE
     default 1 if MPU_LOG_LVL_ERROR
     default 2 if MPU_LOG_LVL_WARNING

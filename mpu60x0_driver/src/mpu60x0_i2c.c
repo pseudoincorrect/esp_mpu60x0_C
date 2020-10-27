@@ -1,3 +1,15 @@
+// =========================================================================
+// This library is placed under the MIT License
+//
+// C port
+// Copyright 2020 Maxime Clement
+//
+// Original Author esp32-MPU-driver C++ libraries
+// Copyright 2017-2018 Natanael Josue Rabello
+//
+// For the license information refer to LICENSE file in root directory
+// =========================================================================
+
 #include <stdio.h>
 #include <stdint.h>
 #include "sdkconfig.h"
