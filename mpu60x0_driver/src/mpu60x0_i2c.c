@@ -17,7 +17,6 @@
 #include "esp_err.h"
 #include "esp_log.h"
 #include "driver/i2c.h"
-#include "driver/gpio.h"
 
 #include "../include/mpu60x0_i2c.h"
 #include "../include/mpu60x0_types.h"
@@ -36,8 +35,8 @@ esp_err_t mpu_i2c_begin(mpu_handle_t* mpu)
     i2c_config_t conf;
     conf.mode = I2C_MODE_MASTER;
     conf.sda_io_num = mpu->init.sda_io_num;
-    conf.sda_pullup_en = mpu->init.sda_pullup_en;
     conf.scl_io_num = mpu->init.scl_io_num;
+    conf.sda_pullup_en = mpu->init.sda_pullup_en;
     conf.scl_pullup_en = mpu->init.scl_pullup_en;
     conf.master.clk_speed = mpu->init.clk_speed;
 

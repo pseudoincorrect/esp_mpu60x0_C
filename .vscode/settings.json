@@ -1,6 +1,8 @@
 {
     "cmake.configureOnOpen": false,
     "files.associations": {
-        "*.inc": "c"
-    }
+        "*.inc": "c",
+        "string_view": "cpp"
+    },
+    "C_Cpp.errorSquiggles": "Disabled"
 }
