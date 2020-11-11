@@ -1,0 +1,31 @@
+--------------------------------------------------------------------------------
+MILESTONES                  (Big Picture Tasks)
+--------------------------------------------------------------------------------
+Provide testing
+Port a more advanced example
+
+
+--------------------------------------------------------------------------------
+TO DO                       (Smaller Tasks)
+--------------------------------------------------------------------------------
+Port self-tests
+Implement a first test fixture
+
+
+--------------------------------------------------------------------------------
+IN PROGRESS                 (Smaller Tasks)
+--------------------------------------------------------------------------------
+Document the code 
+
+
+--------------------------------------------------------------------------------
+DONE                        (Smaller Tasks & Milestones)
+
+Date        Tag     Description
+--------------------------------------------------------------------------------
+11/11/2020  EXAMP   Port an example with Gs and Rad/sec
+MILESTONE --------- Port a first working example
+05/11/2020  FEATUR  Port motion feature
+05/11/2020  ARCHI   Ported to non-OOP (mpu pointer)
+05/11/2020  ARCHI   Changed case formating
+02/11/2020  ARCHI   Initialized project 

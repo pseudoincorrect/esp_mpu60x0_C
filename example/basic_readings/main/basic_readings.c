@@ -21,7 +21,6 @@
 #include "esp_system.h"
 #include "esp_spi_flash.h"
 #include "driver/gpio.h"
-// #include "driver/i2c.h"
 
 // USER
 #include "mpu60x0.h"
@@ -30,6 +29,9 @@ static const char *TAG = "MAIN";
 
 mpu_handle_t mpu;
 
+/*******************************************************************************
+ * @brief Init the I2C connection with MPU
+ */
 static void i2c_slave_init(void)
 {
     esp_err_t err;
@@ -37,10 +39,8 @@ static void i2c_slave_init(void)
     mpu.bus.num = 1;
     mpu.bus.timeout = 50;
     mpu.init.clk_speed = 400000;
-    mpu.init.sda_io_num = GPIO_NUM_19;
-    mpu.init.scl_io_num = GPIO_NUM_18;
-    // mpu.init.sda_io_num = 18;
-    // mpu.init.scl_io_num = 19;
+    mpu.init.sda_io_num = GPIO_NUM_32;
+    mpu.init.scl_io_num = GPIO_NUM_33;
     mpu.init.sda_pullup_en = false;
     mpu.init.scl_pullup_en = false;
     err = mpu_initialize_peripheral(&mpu);
@@ -61,6 +61,9 @@ static void i2c_slave_init(void)
     ESP_LOGI(TAG, "i2c_slave_init");
 }
 
+/*******************************************************************************
+ * @brief Main task
+ */
 static void i2c_test_task(void *arg)
 {
     esp_err_t err;
@@ -70,8 +73,9 @@ static void i2c_test_task(void *arg)
     printf("Reading sensor data:\n");
     raw_axes_t accel_raw;   // x, y, z axes as int16
     raw_axes_t gyro_raw;    // x, y, z axes as int16
-    // float_axes_t accel_g;   // accel axes in (g) gravity format
-    // float_axes_t gyro_dps;  // gyro axes in (DPS) º/s format
+    float_axes_t accel_g;   // accel axes in (g) gravity format
+    float_axes_t gyro_dps;  // gyro axes in (DPS) º/s format
+
     while (true)
     {
         // Read
@@ -79,20 +83,26 @@ static void i2c_test_task(void *arg)
         ESP_ERROR_CHECK(err);
         err = mpu_rotation(&mpu, &gyro_raw);       // fetch raw data from the registers
         ESP_ERROR_CHECK(err);
-        printf("accel: %d\t %d\t %d\n", accel_raw.x, accel_raw.y, accel_raw.z);
+        // printf("accel: %d\t %d\t %d\n", accel_raw.x, accel_raw.y, accel_raw.z);
         // printf("gyro:  %d\t %d\t %d\n", gyro_raw.x, gyro_raw.y, gyro_raw.z);
-        // MPU.motion(&accel_raw, &gyro_raw);  // read both in one shot
+
+        mpu_motion(&mpu, &accel_raw, &gyro_raw);  // read both in one shot
         // Convert
-        // accel_g = mpud::accel_gravity(accel_raw, MPU_ACCEL_FS_4G);
-        // gyro_dps = mpud::gyro_deg_per_sec(gyro_raw, MPU_GYRO_FS_500DPS);
-        // // Debug
-        // printf("accel: [%+6.2f %+6.2f %+6.2f ] (G) \t", accel_g.x, accel_g.y, accel_g.z);
-        // printf("gyro: [%+7.2f %+7.2f %+7.2f ] (º/s)\n", gyro_dps[0], gyro_dps[1],
-        // gyro_dps[2]);
+        accel_g = mpu_math_accel_gravity(&accel_raw, ACCEL_FS_4G);
+        gyro_dps = mpu_math_gyro_deg_per_sec(&gyro_raw, GYRO_FS_500DPS);
+        // Debug
+        printf("accel: [%+6.2f %+6.2f %+6.2f ] (G) \t", accel_g.x, accel_g.y,
+               accel_g.z);
+        printf("gyro: [%+7.2f %+7.2f %+7.2f ] (º/s)\n", gyro_dps.x, gyro_dps.y,
+               gyro_dps.z);
+
         vTaskDelay(300 / portTICK_PERIOD_MS);
     }
 }
 
+/*******************************************************************************
+ * @brief Program main entry point
+ */
 void app_main(void)
 {
     i2c_slave_init();
